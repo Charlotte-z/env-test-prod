@@ -1,5 +1,5 @@
 import path from "path";
-import { Configuration as WebpackConfiguration, HotModuleReplacementPlugin } from "webpack";
+import { Configuration as WebpackConfiguration, HotModuleReplacementPlugin, DefinePlugin } from "webpack";
 import { Configuration as WebpackDevServerConfiguration } from 'webpack-dev-server';
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
@@ -14,7 +14,7 @@ const config: Configuration = {
   output: {
     publicPath: "/",
   },
-  entry: "./src/index.tsx",
+  entry: "./src/index.jsx",
   module: {
     rules: [
       {
@@ -34,9 +34,16 @@ const config: Configuration = {
     ],
   },
   resolve: {
-    extensions: [".tsx", ".ts", ".js"],
+    extensions: [".jsx", ".tsx", ".ts", ".js"],
   },
   plugins: [
+    // new DefinePlugin({
+    //   PRODUCTION: JSON.stringify(true),
+    //   VERSION: JSON.stringify('5fa3b9'), 
+    //   BROWSER_SUPPORTS_HTML5: true,
+    //   TWO: '1+1',
+    //   'typeof window': JSON.stringify('object'),
+    // }),
     new HtmlWebpackPlugin({
       template: "src/index.html",
     }),
